@@ -54,7 +54,7 @@ const NAV = [
   { to: "/agenda", label: "Agenda", icon: CalendarDays },
 ] as const;
 
-function NavList({ onNavigate }: { onNavigate?: () => void }) {
+function NavList({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <nav className="flex flex-col gap-1 px-3">
@@ -81,7 +81,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   const { user } = useSession();
   const { data: profile } = useProfile(user);
   const { data: isAdmin } = useIsAdmin(user);
