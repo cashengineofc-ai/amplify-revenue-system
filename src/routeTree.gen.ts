@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedCampanhasRouteImport } from './routes/_authenticated/campanhas'
+import { Route as AuthenticatedMinhasVendasRouteImport } from './routes/_authenticated/minhas-vendas'
 import { Route as AuthenticatedMarketplaceIndexRouteImport } from './routes/_authenticated/marketplace/index'
 import { Route as AuthenticatedMarketplaceSlugRouteImport } from './routes/_authenticated/marketplace/$slug'
 
@@ -29,6 +31,17 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCampanhasRoute = AuthenticatedCampanhasRouteImport.update({
+  id: '/campanhas',
+  path: '/campanhas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMinhasVendasRoute =
+  AuthenticatedMinhasVendasRouteImport.update({
+    id: '/minhas-vendas',
+    path: '/minhas-vendas',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedMarketplaceIndexRoute =
   AuthenticatedMarketplaceIndexRouteImport.update({
     id: '/marketplace/',
@@ -45,11 +58,15 @@ const AuthenticatedMarketplaceSlugRoute =
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
+  '/campanhas': typeof AuthenticatedCampanhasRoute
+  '/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
   '/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/marketplace/': typeof AuthenticatedMarketplaceIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
+  '/campanhas': typeof AuthenticatedCampanhasRoute
+  '/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
   '/': typeof AuthenticatedIndexRoute
   '/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/marketplace': typeof AuthenticatedMarketplaceIndexRoute
@@ -58,19 +75,35 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/campanhas': typeof AuthenticatedCampanhasRoute
+  '/_authenticated/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/_authenticated/marketplace/': typeof AuthenticatedMarketplaceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/marketplace/$slug' | '/marketplace/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/campanhas'
+    | '/minhas-vendas'
+    | '/marketplace/$slug'
+    | '/marketplace/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/' | '/marketplace/$slug' | '/marketplace'
+  to:
+    | '/auth'
+    | '/campanhas'
+    | '/minhas-vendas'
+    | '/'
+    | '/marketplace/$slug'
+    | '/marketplace'
   id:
     | '__root__'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/campanhas'
+    | '/_authenticated/minhas-vendas'
     | '/_authenticated/'
     | '/_authenticated/marketplace/$slug'
     | '/_authenticated/marketplace/'
@@ -104,6 +137,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/campanhas': {
+      id: '/_authenticated/campanhas'
+      path: '/campanhas'
+      fullPath: '/campanhas'
+      preLoaderRoute: typeof AuthenticatedCampanhasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/minhas-vendas': {
+      id: '/_authenticated/minhas-vendas'
+      path: '/minhas-vendas'
+      fullPath: '/minhas-vendas'
+      preLoaderRoute: typeof AuthenticatedMinhasVendasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/marketplace/': {
       id: '/_authenticated/marketplace/'
       path: '/marketplace'
@@ -122,12 +169,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCampanhasRoute: typeof AuthenticatedCampanhasRoute
+  AuthenticatedMinhasVendasRoute: typeof AuthenticatedMinhasVendasRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedMarketplaceSlugRoute: typeof AuthenticatedMarketplaceSlugRoute
   AuthenticatedMarketplaceIndexRoute: typeof AuthenticatedMarketplaceIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCampanhasRoute: AuthenticatedCampanhasRoute,
+  AuthenticatedMinhasVendasRoute: AuthenticatedMinhasVendasRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedMarketplaceSlugRoute: AuthenticatedMarketplaceSlugRoute,
   AuthenticatedMarketplaceIndexRoute: AuthenticatedMarketplaceIndexRoute,
