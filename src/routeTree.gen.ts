@@ -13,6 +13,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedMarketplaceIndexRouteImport } from './routes/_authenticated/marketplace/index'
+import { Route as AuthenticatedMarketplaceSlugRouteImport } from './routes/_authenticated/marketplace/$slug'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -34,15 +35,23 @@ const AuthenticatedMarketplaceIndexRoute =
     path: '/marketplace/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedMarketplaceSlugRoute =
+  AuthenticatedMarketplaceSlugRouteImport.update({
+    id: '/marketplace/$slug',
+    path: '/marketplace/$slug',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
+  '/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/marketplace/': typeof AuthenticatedMarketplaceIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/': typeof AuthenticatedIndexRoute
+  '/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/marketplace': typeof AuthenticatedMarketplaceIndexRoute
 }
 export interface FileRoutesById {
@@ -50,18 +59,20 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/_authenticated/marketplace/': typeof AuthenticatedMarketplaceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/marketplace/'
+  fullPaths: '/' | '/auth' | '/marketplace/$slug' | '/marketplace/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/' | '/marketplace'
+  to: '/auth' | '/' | '/marketplace/$slug' | '/marketplace'
   id:
     | '__root__'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/'
+    | '/_authenticated/marketplace/$slug'
     | '/_authenticated/marketplace/'
   fileRoutesById: FileRoutesById
 }
@@ -100,16 +111,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMarketplaceIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/marketplace/$slug': {
+      id: '/_authenticated/marketplace/$slug'
+      path: '/marketplace/$slug'
+      fullPath: '/marketplace/$slug'
+      preLoaderRoute: typeof AuthenticatedMarketplaceSlugRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedMarketplaceSlugRoute: typeof AuthenticatedMarketplaceSlugRoute
   AuthenticatedMarketplaceIndexRoute: typeof AuthenticatedMarketplaceIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedMarketplaceSlugRoute: AuthenticatedMarketplaceSlugRoute,
   AuthenticatedMarketplaceIndexRoute: AuthenticatedMarketplaceIndexRoute,
 }
 
