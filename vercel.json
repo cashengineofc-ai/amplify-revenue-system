@@ -2,10 +2,5 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/((?!assets|_vercel|api|favicon\\.ico|robots\\.txt|.*\\.[a-zA-Z0-9]+$).*)",
-      "destination": "/index.html"
-    }
-  ]
+  "installCommand": "npm install"
 }
