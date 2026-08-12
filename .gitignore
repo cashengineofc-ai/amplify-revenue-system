@@ -16,6 +16,10 @@ dist-ssr
 .nitro
 .vercel
 .env
+.env.local
+.env.*.local
+.env.development
+.env.production
 *.local
 
 # Wrangler / Cloudflare
