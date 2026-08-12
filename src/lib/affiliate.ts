@@ -168,7 +168,18 @@ export async function affiliateToProduct(
     .select("id, campaign_id");
   if (adsError) throw adsError;
 
-  const daily: Record<string, unknown>[] = [];
+  const daily: {
+    campaign_id: string;
+    ad_id: string | null;
+    user_id: string;
+    day: string;
+    spend: number;
+    revenue: number;
+    sales: number;
+    clicks: number;
+    impressions: number;
+    leads: number;
+  }[] = [];
   for (const c of campaigns ?? []) {
     const campaignAds = (insertedAds ?? []).filter((a) => a.campaign_id === c.id);
     for (let d = 89; d >= 0; d--) {
@@ -187,7 +198,6 @@ export async function affiliateToProduct(
         clicks: Math.round(m.cliques * factor),
         impressions: Math.round(m.impressoes * factor),
         leads: Math.round(m.leads * factor),
-        metrics: {},
       });
     }
   }
@@ -206,8 +216,8 @@ export async function affiliateToProduct(
       name,
       email: `${name.toLowerCase().replace(/\s/g, ".")}@email.com`,
       phone: `(11) 9${ri(1000, 9999)}-${ri(1000, 9999)}`,
-      stage: (["novo", "contato", "qualificado", "negociacao", "ganho", "perdido"] as const)[i % 6],
-      source: PLATFORM_KEYS[i % PLATFORM_KEYS.length],
+      stage: (["novo", "contato", "qualificado", "negociacao", "ganho", "perdido"] as const)[i % 6]!,
+      source: PLATFORM_KEYS[i % PLATFORM_KEYS.length]!,
       value: Number(product.ticket),
     })),
   );
