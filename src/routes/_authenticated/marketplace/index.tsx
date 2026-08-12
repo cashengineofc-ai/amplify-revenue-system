@@ -71,7 +71,7 @@ function Marketplace() {
   );
 
   const list = useMemo(() => {
-    const metric = (p: (typeof products)[number]) => p.product_metrics?.[0];
+    const metric = (p: (typeof products)[number]) => p.product_metrics;
     return products
       .filter((p) => (cat === "todas" ? true : p.category === cat))
       .filter((p) => p.name.toLowerCase().includes(q.toLowerCase().trim()))
@@ -149,7 +149,7 @@ function Marketplace() {
       ) : (
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {list.map((p) => {
-            const m = p.product_metrics?.[0];
+            const m = p.product_metrics;
             return (
               <Link
                 key={p.id}
@@ -185,7 +185,7 @@ function Marketplace() {
                     <h2 className="font-display text-base leading-snug font-bold">{p.name}</h2>
                     <span className="flex shrink-0 items-center gap-1 text-xs font-semibold text-warning">
                       <Star className="size-3 fill-current" />
-                      {num(Number(m?.rating ?? 0), 1)}
+                      {num(Number(m?.stars ?? 0), 1)}
                     </span>
                   </div>
                   <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{p.tagline}</p>
@@ -213,7 +213,7 @@ function Marketplace() {
                     </div>
                     <div>
                       <p className="label-mono">Conversão</p>
-                      <p className="text-sm font-semibold">{pct(Number(m?.conversion ?? 0), 1)}</p>
+                      <p className="text-sm font-semibold">{pct(Number(m?.conversion_rate ?? 0), 1)}</p>
                     </div>
                     <div>
                       <p className="label-mono">Reembolso</p>
@@ -224,7 +224,7 @@ function Marketplace() {
                   <div className="mt-4 flex items-center justify-between">
                     <Temperature value={Number(m?.temperature ?? 0)} />
                     <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
-                      <Users className="size-3" /> {num(Number(m?.affiliates ?? 0))} afiliados ·{" "}
+                      <Users className="size-3" /> {num(Number(m?.affiliates_count ?? 0))} afiliados ·{" "}
                       {num(Number(m?.sales_30d ?? 0))} vendas/30d
                     </span>
                   </div>
