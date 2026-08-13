@@ -13,6 +13,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedCampanhasRouteImport } from './routes/_authenticated/campanhas'
+import { Route as AuthenticatedMeusProdutosRouteImport } from './routes/_authenticated/meus-produtos'
 import { Route as AuthenticatedMinhasVendasRouteImport } from './routes/_authenticated/minhas-vendas'
 import { Route as AuthenticatedMarketplaceIndexRouteImport } from './routes/_authenticated/marketplace/index'
 import { Route as AuthenticatedMarketplaceSlugRouteImport } from './routes/_authenticated/marketplace/$slug'
@@ -36,6 +37,12 @@ const AuthenticatedCampanhasRoute = AuthenticatedCampanhasRouteImport.update({
   path: '/campanhas',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedMeusProdutosRoute =
+  AuthenticatedMeusProdutosRouteImport.update({
+    id: '/meus-produtos',
+    path: '/meus-produtos',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedMinhasVendasRoute =
   AuthenticatedMinhasVendasRouteImport.update({
     id: '/minhas-vendas',
@@ -59,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
   '/campanhas': typeof AuthenticatedCampanhasRoute
+  '/meus-produtos': typeof AuthenticatedMeusProdutosRoute
   '/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
   '/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/marketplace/': typeof AuthenticatedMarketplaceIndexRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/campanhas': typeof AuthenticatedCampanhasRoute
+  '/meus-produtos': typeof AuthenticatedMeusProdutosRoute
   '/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
   '/': typeof AuthenticatedIndexRoute
   '/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
@@ -76,6 +85,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/campanhas': typeof AuthenticatedCampanhasRoute
+  '/_authenticated/meus-produtos': typeof AuthenticatedMeusProdutosRoute
   '/_authenticated/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/campanhas'
+    | '/meus-produtos'
     | '/minhas-vendas'
     | '/marketplace/$slug'
     | '/marketplace/'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/auth'
     | '/campanhas'
+    | '/meus-produtos'
     | '/minhas-vendas'
     | '/'
     | '/marketplace/$slug'
@@ -103,6 +115,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/campanhas'
+    | '/_authenticated/meus-produtos'
     | '/_authenticated/minhas-vendas'
     | '/_authenticated/'
     | '/_authenticated/marketplace/$slug'
@@ -144,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCampanhasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/meus-produtos': {
+      id: '/_authenticated/meus-produtos'
+      path: '/meus-produtos'
+      fullPath: '/meus-produtos'
+      preLoaderRoute: typeof AuthenticatedMeusProdutosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/minhas-vendas': {
       id: '/_authenticated/minhas-vendas'
       path: '/minhas-vendas'
@@ -170,6 +190,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCampanhasRoute: typeof AuthenticatedCampanhasRoute
+  AuthenticatedMeusProdutosRoute: typeof AuthenticatedMeusProdutosRoute
   AuthenticatedMinhasVendasRoute: typeof AuthenticatedMinhasVendasRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedMarketplaceSlugRoute: typeof AuthenticatedMarketplaceSlugRoute
@@ -178,6 +199,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCampanhasRoute: AuthenticatedCampanhasRoute,
+  AuthenticatedMeusProdutosRoute: AuthenticatedMeusProdutosRoute,
   AuthenticatedMinhasVendasRoute: AuthenticatedMinhasVendasRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedMarketplaceSlugRoute: AuthenticatedMarketplaceSlugRoute,
