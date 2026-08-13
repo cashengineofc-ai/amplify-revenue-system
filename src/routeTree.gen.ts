@@ -12,8 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated/agenda'
 import { Route as AuthenticatedCampanhasRouteImport } from './routes/_authenticated/campanhas'
+import { Route as AuthenticatedComunidadeRouteImport } from './routes/_authenticated/comunidade'
+import { Route as AuthenticatedCrmRouteImport } from './routes/_authenticated/crm'
+import { Route as AuthenticatedEleveIaRouteImport } from './routes/_authenticated/eleve-ia'
+import { Route as AuthenticatedFinanceiroRouteImport } from './routes/_authenticated/financeiro'
+import { Route as AuthenticatedMeusProdutosRouteImport } from './routes/_authenticated/meus-produtos'
 import { Route as AuthenticatedMinhasVendasRouteImport } from './routes/_authenticated/minhas-vendas'
+import { Route as AuthenticatedTreinamentosRouteImport } from './routes/_authenticated/treinamentos'
 import { Route as AuthenticatedMarketplaceIndexRouteImport } from './routes/_authenticated/marketplace/index'
 import { Route as AuthenticatedMarketplaceSlugRouteImport } from './routes/_authenticated/marketplace/$slug'
 
@@ -31,15 +38,52 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAgendaRoute = AuthenticatedAgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCampanhasRoute = AuthenticatedCampanhasRouteImport.update({
   id: '/campanhas',
   path: '/campanhas',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedComunidadeRoute = AuthenticatedComunidadeRouteImport.update({
+  id: '/comunidade',
+  path: '/comunidade',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCrmRoute = AuthenticatedCrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEleveIaRoute = AuthenticatedEleveIaRouteImport.update({
+  id: '/eleve-ia',
+  path: '/eleve-ia',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFinanceiroRoute = AuthenticatedFinanceiroRouteImport.update({
+  id: '/financeiro',
+  path: '/financeiro',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMeusProdutosRoute =
+  AuthenticatedMeusProdutosRouteImport.update({
+    id: '/meus-produtos',
+    path: '/meus-produtos',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedMinhasVendasRoute =
   AuthenticatedMinhasVendasRouteImport.update({
     id: '/minhas-vendas',
     path: '/minhas-vendas',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTreinamentosRoute =
+  AuthenticatedTreinamentosRouteImport.update({
+    id: '/treinamentos',
+    path: '/treinamentos',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedMarketplaceIndexRoute =
@@ -58,15 +102,29 @@ const AuthenticatedMarketplaceSlugRoute =
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
   '/campanhas': typeof AuthenticatedCampanhasRoute
+  '/comunidade': typeof AuthenticatedComunidadeRoute
+  '/crm': typeof AuthenticatedCrmRoute
+  '/eleve-ia': typeof AuthenticatedEleveIaRoute
+  '/financeiro': typeof AuthenticatedFinanceiroRoute
+  '/meus-produtos': typeof AuthenticatedMeusProdutosRoute
   '/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
+  '/treinamentos': typeof AuthenticatedTreinamentosRoute
   '/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/marketplace/': typeof AuthenticatedMarketplaceIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
   '/campanhas': typeof AuthenticatedCampanhasRoute
+  '/comunidade': typeof AuthenticatedComunidadeRoute
+  '/crm': typeof AuthenticatedCrmRoute
+  '/eleve-ia': typeof AuthenticatedEleveIaRoute
+  '/financeiro': typeof AuthenticatedFinanceiroRoute
+  '/meus-produtos': typeof AuthenticatedMeusProdutosRoute
   '/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
+  '/treinamentos': typeof AuthenticatedTreinamentosRoute
   '/': typeof AuthenticatedIndexRoute
   '/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/marketplace': typeof AuthenticatedMarketplaceIndexRoute
@@ -75,8 +133,15 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/agenda': typeof AuthenticatedAgendaRoute
   '/_authenticated/campanhas': typeof AuthenticatedCampanhasRoute
+  '/_authenticated/comunidade': typeof AuthenticatedComunidadeRoute
+  '/_authenticated/crm': typeof AuthenticatedCrmRoute
+  '/_authenticated/eleve-ia': typeof AuthenticatedEleveIaRoute
+  '/_authenticated/financeiro': typeof AuthenticatedFinanceiroRoute
+  '/_authenticated/meus-produtos': typeof AuthenticatedMeusProdutosRoute
   '/_authenticated/minhas-vendas': typeof AuthenticatedMinhasVendasRoute
+  '/_authenticated/treinamentos': typeof AuthenticatedTreinamentosRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/marketplace/$slug': typeof AuthenticatedMarketplaceSlugRoute
   '/_authenticated/marketplace/': typeof AuthenticatedMarketplaceIndexRoute
@@ -86,15 +151,29 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/agenda'
     | '/campanhas'
+    | '/comunidade'
+    | '/crm'
+    | '/eleve-ia'
+    | '/financeiro'
+    | '/meus-produtos'
     | '/minhas-vendas'
+    | '/treinamentos'
     | '/marketplace/$slug'
     | '/marketplace/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
+    | '/agenda'
     | '/campanhas'
+    | '/comunidade'
+    | '/crm'
+    | '/eleve-ia'
+    | '/financeiro'
+    | '/meus-produtos'
     | '/minhas-vendas'
+    | '/treinamentos'
     | '/'
     | '/marketplace/$slug'
     | '/marketplace'
@@ -102,8 +181,15 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/agenda'
     | '/_authenticated/campanhas'
+    | '/_authenticated/comunidade'
+    | '/_authenticated/crm'
+    | '/_authenticated/eleve-ia'
+    | '/_authenticated/financeiro'
+    | '/_authenticated/meus-produtos'
     | '/_authenticated/minhas-vendas'
+    | '/_authenticated/treinamentos'
     | '/_authenticated/'
     | '/_authenticated/marketplace/$slug'
     | '/_authenticated/marketplace/'
@@ -137,6 +223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/agenda': {
+      id: '/_authenticated/agenda'
+      path: '/agenda'
+      fullPath: '/agenda'
+      preLoaderRoute: typeof AuthenticatedAgendaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/campanhas': {
       id: '/_authenticated/campanhas'
       path: '/campanhas'
@@ -144,11 +237,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCampanhasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/comunidade': {
+      id: '/_authenticated/comunidade'
+      path: '/comunidade'
+      fullPath: '/comunidade'
+      preLoaderRoute: typeof AuthenticatedComunidadeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/crm': {
+      id: '/_authenticated/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof AuthenticatedCrmRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/eleve-ia': {
+      id: '/_authenticated/eleve-ia'
+      path: '/eleve-ia'
+      fullPath: '/eleve-ia'
+      preLoaderRoute: typeof AuthenticatedEleveIaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/financeiro': {
+      id: '/_authenticated/financeiro'
+      path: '/financeiro'
+      fullPath: '/financeiro'
+      preLoaderRoute: typeof AuthenticatedFinanceiroRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/meus-produtos': {
+      id: '/_authenticated/meus-produtos'
+      path: '/meus-produtos'
+      fullPath: '/meus-produtos'
+      preLoaderRoute: typeof AuthenticatedMeusProdutosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/minhas-vendas': {
       id: '/_authenticated/minhas-vendas'
       path: '/minhas-vendas'
       fullPath: '/minhas-vendas'
       preLoaderRoute: typeof AuthenticatedMinhasVendasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/treinamentos': {
+      id: '/_authenticated/treinamentos'
+      path: '/treinamentos'
+      fullPath: '/treinamentos'
+      preLoaderRoute: typeof AuthenticatedTreinamentosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/marketplace/': {
@@ -169,16 +304,30 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgendaRoute: typeof AuthenticatedAgendaRoute
   AuthenticatedCampanhasRoute: typeof AuthenticatedCampanhasRoute
+  AuthenticatedComunidadeRoute: typeof AuthenticatedComunidadeRoute
+  AuthenticatedCrmRoute: typeof AuthenticatedCrmRoute
+  AuthenticatedEleveIaRoute: typeof AuthenticatedEleveIaRoute
+  AuthenticatedFinanceiroRoute: typeof AuthenticatedFinanceiroRoute
+  AuthenticatedMeusProdutosRoute: typeof AuthenticatedMeusProdutosRoute
   AuthenticatedMinhasVendasRoute: typeof AuthenticatedMinhasVendasRoute
+  AuthenticatedTreinamentosRoute: typeof AuthenticatedTreinamentosRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedMarketplaceSlugRoute: typeof AuthenticatedMarketplaceSlugRoute
   AuthenticatedMarketplaceIndexRoute: typeof AuthenticatedMarketplaceIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgendaRoute: AuthenticatedAgendaRoute,
   AuthenticatedCampanhasRoute: AuthenticatedCampanhasRoute,
+  AuthenticatedComunidadeRoute: AuthenticatedComunidadeRoute,
+  AuthenticatedCrmRoute: AuthenticatedCrmRoute,
+  AuthenticatedEleveIaRoute: AuthenticatedEleveIaRoute,
+  AuthenticatedFinanceiroRoute: AuthenticatedFinanceiroRoute,
+  AuthenticatedMeusProdutosRoute: AuthenticatedMeusProdutosRoute,
   AuthenticatedMinhasVendasRoute: AuthenticatedMinhasVendasRoute,
+  AuthenticatedTreinamentosRoute: AuthenticatedTreinamentosRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedMarketplaceSlugRoute: AuthenticatedMarketplaceSlugRoute,
   AuthenticatedMarketplaceIndexRoute: AuthenticatedMarketplaceIndexRoute,
