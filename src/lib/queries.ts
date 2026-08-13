@@ -99,3 +99,55 @@ export function buildSeries(sales: { created_at: string; commission: number; amo
 
   return [...buckets.values()];
 }
+
+export async function fetchTransactions(userId: string) {
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(300);
+  if (error) throw error;
+  return data;
+}
+
+export async function fetchWithdrawals(userId: string) {
+  const { data, error } = await supabase
+    .from("withdrawals")
+    .select("*")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(100);
+  if (error) throw error;
+  return data;
+}
+
+export async function fetchLeads(userId: string) {
+  const { data, error } = await supabase
+    .from("leads")
+    .select("*, products(name), campaigns(name, platform)")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(400);
+  if (error) throw error;
+  return data;
+}
+
+export async function fetchFeedbacks() {
+  const { data, error } = await supabase
+    .from("feedbacks")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(100);
+  if (error) throw error;
+  return data;
+}
+
+export async function fetchProfiles() {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .order("created_at", { ascending: true });
+  if (error) throw error;
+  return data;
+}
