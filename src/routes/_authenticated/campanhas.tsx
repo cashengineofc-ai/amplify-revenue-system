@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -392,8 +392,8 @@ function CampaignCard({ campaign }: { campaign: CampaignRow }) {
               const bd = (a.breakdowns ?? {}) as Breakdowns;
               const open = openAd === a.id;
               return (
-                <>
-                  <tr key={a.id} className="border-b border-border/60">
+                <Fragment key={a.id}>
+                  <tr className="border-b border-border/60">
                     <td className="px-5 py-3 font-medium">{a.name}</td>
                     <td className="px-5 py-3 text-muted-foreground">{a.adset}</td>
                     <td className="px-5 py-3 capitalize text-muted-foreground">{a.format}</td>
@@ -427,7 +427,7 @@ function CampaignCard({ campaign }: { campaign: CampaignRow }) {
                     </td>
                   </tr>
                   {open && (
-                    <tr key={`${a.id}-detail`} className="border-b border-border/60 bg-surface-2/40">
+                    <tr className="border-b border-border/60 bg-surface-2/40">
                       <td colSpan={10} className="px-5 py-5">
                         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                           <div className="rounded-lg bg-surface-2 p-4">
@@ -478,7 +478,7 @@ function CampaignCard({ campaign }: { campaign: CampaignRow }) {
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               );
             })}
           </tbody>
