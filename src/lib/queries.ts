@@ -151,3 +151,42 @@ export async function fetchProfiles() {
   if (error) throw error;
   return data;
 }
+
+export async function fetchDailyMetrics(userId: string, range: Range) {
+  const { data, error } = await supabase
+    .from("campaign_metrics_daily")
+    .select("day, spend, revenue, sales, clicks, impressions, leads, campaign_id")
+    .eq("user_id", userId)
+    .gte("day", rangeStart(range).toISOString().slice(0, 10))
+    .order("day", { ascending: true });
+  if (error) throw error;
+  return data;
+}
+
+export async function fetchTrainings() {
+  const { data, error } = await supabase
+    .from("trainings")
+    .select("*, training_lessons(*)")
+    .order("sort_order", { ascending: true });
+  if (error) throw error;
+  return data;
+}
+
+export async function fetchTrainingProgress(userId: string) {
+  const { data, error } = await supabase
+    .from("training_progress")
+    .select("lesson_id")
+    .eq("user_id", userId);
+  if (error) throw error;
+  return data.map((r) => r.lesson_id);
+}
+
+export async function fetchEvents() {
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .order("starts_at", { ascending: true })
+    .limit(50);
+  if (error) throw error;
+  return data;
+}
