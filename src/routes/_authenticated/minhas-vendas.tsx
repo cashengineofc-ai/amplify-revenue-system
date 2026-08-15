@@ -90,7 +90,16 @@ function MinhasVendas() {
                     <td className="px-5 py-3 font-semibold text-success">
                       {brl(Number(s.commission))}
                     </td>
-                    <td className="px-5 py-3 capitalize">{s.status}</td>
+                    <td className="px-5 py-3">
+                      <span
+                        className={cn(
+                          "rounded-md px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider",
+                          STATUS_STYLE[s.status] ?? "bg-muted text-muted-foreground",
+                        )}
+                      >
+                        {s.status}
+                      </span>
+                    </td>
                     <td className="px-5 py-3 text-muted-foreground">{dateBR(s.created_at)}</td>
                   </tr>
                 ))}
