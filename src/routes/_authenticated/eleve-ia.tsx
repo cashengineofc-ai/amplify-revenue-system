@@ -140,13 +140,13 @@ function EleveIa() {
             >
               <div
                 className={cn(
-                  "max-w-[85%] rounded-2xl px-4 py-3 text-sm whitespace-pre-wrap",
+                  "max-w-[85%] rounded-2xl px-4 py-3 text-sm",
                   m.role === "user"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-surface-2 text-foreground",
+                    ? "whitespace-pre-wrap bg-primary text-primary-foreground"
+                    : "bg-surface-2 text-muted-foreground",
                 )}
               >
-                {m.content}
+                {m.role === "user" ? m.content : <RichText text={m.content} />}
               </div>
             </div>
           ))}
