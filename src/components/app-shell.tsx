@@ -162,6 +162,12 @@ function NotificationBell() {
     queryClient.invalidateQueries({ queryKey: ["notifications"] });
   };
 
+  const markOne = async (id: string) => {
+    await supabase.from("notifications").update({ read: true }).eq("id", id);
+    queryClient.invalidateQueries({ queryKey: ["notifications"] });
+  };
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="relative grid size-9 place-items-center rounded-lg border border-border bg-surface-2 text-muted-foreground transition-colors hover:text-foreground">
