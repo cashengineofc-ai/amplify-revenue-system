@@ -34,6 +34,11 @@ function MinhasVendas() {
     queryFn: () => fetchSales(user!.id),
   });
 
+  const approved = sales.filter((s) => s.status === "aprovada");
+  const revenue = approved.reduce((a, s) => a + Number(s.amount), 0);
+  const commission = approved.reduce((a, s) => a + Number(s.commission), 0);
+  const ticket = approved.length ? revenue / approved.length : 0;
+
   return (
     <>
       <PageHeader
@@ -41,6 +46,18 @@ function MinhasVendas() {
         title="Minhas vendas"
         description="Cada transação registrada nas suas campanhas, em tempo real."
       />
+      {sales.length > 0 && (
+        <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <StatCard label="Comissão aprovada" value={brl(commission)} highlight />
+          <StatCard label="Faturamento gerado" value={brl(revenue)} />
+          <StatCard label="Ticket médio" value={brl(ticket)} />
+          <StatCard
+            label="Vendas aprovadas"
+            value={approved.length}
+            hint={`${sales.length} no total`}
+          />
+        </div>
+      )}
       {sales.length === 0 ? (
         <EmptyState
           title="Nenhuma venda ainda"
