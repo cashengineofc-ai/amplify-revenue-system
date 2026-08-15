@@ -25,6 +25,47 @@ export const Route = createFileRoute("/_authenticated/eleve-ia")({
 
 type Message = { role: "user" | "assistant"; content: string };
 
+/** Renderiza um subconjunto de markdown (títulos, negrito, listas, divisórias). */
+function RichText({ text }: { text: string }) {
+  const bold = (line: string) =>
+    line.split(/\*\*(.+?)\*\*/g).map((part, i) =>
+      i % 2 === 1 ? (
+        <strong key={i} className="font-semibold text-foreground">
+          {part}
+        </strong>
+      ) : (
+        <span key={i}>{part}</span>
+      ),
+    );
+
+  return (
+    <div className="space-y-2">
+      {text.split("\n").map((raw, i) => {
+        const line = raw.trimEnd();
+        if (!line.trim()) return <div key={i} className="h-1" />;
+        if (/^---+$/.test(line.trim()))
+          return <hr key={i} className="border-border/70" />;
+        const heading = /^(#{1,6})\s+(.*)$/.exec(line);
+        if (heading)
+          return (
+            <p key={i} className="font-display text-sm font-bold text-foreground">
+              {bold(heading[2] ?? "")}
+            </p>
+          );
+        const bullet = /^\s*([-*•]|\d+\.)\s+(.*)$/.exec(line);
+        if (bullet)
+          return (
+            <p key={i} className="flex gap-2 pl-1">
+              <span className="text-primary">•</span>
+              <span>{bold(bullet[2] ?? "")}</span>
+            </p>
+          );
+        return <p key={i}>{bold(line)}</p>;
+      })}
+    </div>
+  );
+}
+
 const SUGGESTIONS = [
   "Crie 5 copys de anúncio para Meta Ads de um curso de renda extra",
   "Meu ROAS caiu de 3.2 para 1.4. O que devo checar primeiro?",
