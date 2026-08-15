@@ -2,9 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { useSession } from "@/hooks/use-session";
-import { EmptyState, PageHeader, SectionCard } from "@/components/ui-kit";
+import { EmptyState, PageHeader, SectionCard, StatCard } from "@/components/ui-kit";
 import { brl, dateBR, PLATFORMS } from "@/lib/format";
 import { fetchSales } from "@/lib/queries";
+import { cn } from "@/lib/utils";
+
+const STATUS_STYLE: Record<string, string> = {
+  aprovada: "bg-success/15 text-success",
+  pendente: "bg-warning/15 text-warning",
+  reembolsada: "bg-muted text-muted-foreground",
+  chargeback: "bg-primary/15 text-primary",
+};
 
 export const Route = createFileRoute("/_authenticated/minhas-vendas")({
   head: () => ({
