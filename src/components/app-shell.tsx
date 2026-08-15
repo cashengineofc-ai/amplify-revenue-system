@@ -162,6 +162,12 @@ function NotificationBell() {
     queryClient.invalidateQueries({ queryKey: ["notifications"] });
   };
 
+  const markOne = async (id: string) => {
+    await supabase.from("notifications").update({ read: true }).eq("id", id);
+    queryClient.invalidateQueries({ queryKey: ["notifications"] });
+  };
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="relative grid size-9 place-items-center rounded-lg border border-border bg-surface-2 text-muted-foreground transition-colors hover:text-foreground">
@@ -188,11 +194,19 @@ function NotificationBell() {
           </p>
         )}
         {data.map((n) => (
-          <DropdownMenuItem key={n.id} className="flex-col items-start gap-0.5">
-            <span className="text-sm font-medium">{n.title}</span>
+          <DropdownMenuItem
+            key={n.id}
+            onSelect={() => void markOne(n.id)}
+            className="flex-col items-start gap-0.5"
+          >
+            <span className="flex w-full items-center gap-2 text-sm font-medium">
+              {!n.read && <span className="size-1.5 shrink-0 rounded-full bg-primary" />}
+              <span className={cn("truncate", n.read && "text-muted-foreground")}>{n.title}</span>
+            </span>
             {n.body && <span className="text-xs text-muted-foreground">{n.body}</span>}
           </DropdownMenuItem>
         ))}
+
       </DropdownMenuContent>
     </DropdownMenu>
   );
