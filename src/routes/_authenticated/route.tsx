@@ -5,14 +5,11 @@ import { AppShell } from "@/components/app-shell";
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   beforeLoad: async () => {
-    const { data } = await supabase.auth.getUser();
-    if (data.user) return { user: data.user };
-
-    // Acesso livre para testes: cria uma sessão de convidado automaticamente.
-    const { data: guest, error: guestError } = await supabase.auth.signInAnonymously();
-    if (guestError || !guest.user) throw redirect({ to: "/auth" });
-    return { user: guest.user };
+    const { data, error } = await supabase.auth.getUser();
+    if (error || !data.user) throw redirect({ to: "/auth" });
+    return { user: data.user };
   },
+
 
   component: () => (
     <AppShell>
